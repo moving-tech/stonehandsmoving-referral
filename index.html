@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stone Hands Moving - Book Your Move</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding: 50px; 
+            background: #7f1d1d; 
+            color: white; 
+        }
+        .container { 
+            max-width: 500px; 
+            margin: 0 auto; 
+            background: rgba(255,255,255,0.1); 
+            padding: 30px; 
+            border-radius: 10px; 
+        }
+        .btn { 
+            background: #10b981; 
+            color: white; 
+            padding: 15px 30px; 
+            text-decoration: none; 
+            border-radius: 5px; 
+            display: inline-block; 
+            margin-top: 20px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Stone Hands Moving</h1>
+        <div id="msg">
+            <p>Thanks for using our referral link!</p>
+            <p>Redirecting you to our booking form...</p>
+        </div>
+        <a href="https://forms.gle/9QkPXgngGRBosMncA" class="btn" id="continueBtn">
+            Continue to Booking Form
+        </a>
+    </div>
+
+    <script>
+        // Get referral from URL
+        var params = new URLSearchParams(window.location.search);
+        var ref = params.get('ref');
+        
+        // Store referral if present
+        if (ref) {
+            localStorage.setItem('referral', ref);
+            // Track the click
+            var img = new Image();
+            img.src = 'https://n8n-movers-project-n8n.5gwahg.easypanel.host/webhook/track?ref=' + ref;
+        } else {
+            document.getElementById('msg').innerHTML = '<p>Welcome! Please fill out our booking form.</p>';
+        }
+        
+        // Auto-redirect after 3 seconds
+        setTimeout(function() {
+            window.location.href = 'https://forms.gle/9QkPXgngGRBosMncA';
+        }, 3000);
+        
+        // Manual click
+        document.getElementById('continueBtn').onclick = function() {
+            window.location.href = 'https://forms.gle/9QkPXgngGRBosMncA';
+            return false;
+        };
+    </script>
+</body>
+</html>
